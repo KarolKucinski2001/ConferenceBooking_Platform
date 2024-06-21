@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConferenceBooking.Web.APi", "ConferenceBooking.Web.APi\ConferenceBooking.Web.APi.csproj", "{77E66498-B76F-4C75-BC5F-B6E9FE7A210F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{23E2D799-DAD5-45FE-B5E5-BB84F766BCA5} = {23E2D799-DAD5-45FE-B5E5-BB84F766BCA5}
+		{D15077C4-C64E-45E7-B6A6-929CF2A079A8} = {D15077C4-C64E-45E7-B6A6-929CF2A079A8}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConferenceBooking.Application", "ConferenceBooking.Application\ConferenceBooking.Application.csproj", "{D15077C4-C64E-45E7-B6A6-929CF2A079A8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{273E689C-E28C-4A76-A8FB-7D49A6A9D4ED} = {273E689C-E28C-4A76-A8FB-7D49A6A9D4ED}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConferenceBooking.Domain", "ConferenceBooking.Domain\ConferenceBooking.Domain.csproj", "{273E689C-E28C-4A76-A8FB-7D49A6A9D4ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConferenceBooking.Infrastructure", "ConferenceBooking.Infrastructure\ConferenceBooking.Infrastructure.csproj", "{23E2D799-DAD5-45FE-B5E5-BB84F766BCA5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D15077C4-C64E-45E7-B6A6-929CF2A079A8} = {D15077C4-C64E-45E7-B6A6-929CF2A079A8}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConferenceBooking.SharedKernel", "ConferenceBooking.SharedKernel\ConferenceBooking.SharedKernel.csproj", "{33C1BD28-17AE-4EAD-9F61-ED41ECEB4DA5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77E66498-B76F-4C75-BC5F-B6E9FE7A210F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77E66498-B76F-4C75-BC5F-B6E9FE7A210F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77E66498-B76F-4C75-BC5F-B6E9FE7A210F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77E66498-B76F-4C75-BC5F-B6E9FE7A210F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D15077C4-C64E-45E7-B6A6-929CF2A079A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D15077C4-C64E-45E7-B6A6-929CF2A079A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D15077C4-C64E-45E7-B6A6-929CF2A079A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D15077C4-C64E-45E7-B6A6-929CF2A079A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{273E689C-E28C-4A76-A8FB-7D49A6A9D4ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{273E689C-E28C-4A76-A8FB-7D49A6A9D4ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{273E689C-E28C-4A76-A8FB-7D49A6A9D4ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{273E689C-E28C-4A76-A8FB-7D49A6A9D4ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23E2D799-DAD5-45FE-B5E5-BB84F766BCA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23E2D799-DAD5-45FE-B5E5-BB84F766BCA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23E2D799-DAD5-45FE-B5E5-BB84F766BCA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23E2D799-DAD5-45FE-B5E5-BB84F766BCA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33C1BD28-17AE-4EAD-9F61-ED41ECEB4DA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33C1BD28-17AE-4EAD-9F61-ED41ECEB4DA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33C1BD28-17AE-4EAD-9F61-ED41ECEB4DA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33C1BD28-17AE-4EAD-9F61-ED41ECEB4DA5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {347F8FFE-CBA3-431F-858A-B98E30C2100C}
+	EndGlobalSection
+EndGlobal
