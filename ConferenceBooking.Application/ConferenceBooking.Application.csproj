@@ -8,15 +8,17 @@
 
   <ItemGroup>
     <Folder Include="Dto\" />
-    <Folder Include="Mappings\" />
     <Folder Include="Validators\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ConferenceBooking.Domain\ConferenceBooking.Domain.csproj" />
   </ItemGroup>
 
 </Project>

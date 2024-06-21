@@ -15,4 +15,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.16" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ConferenceBooking.Application\ConferenceBooking.Application.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace ConferenceBooking.Web.APi.Controllers
+namespace ConferenceBooking.WebAPi.Controllers
 {
     [ApiController]
     [Route("[controller]")]

@@ -1,4 +1,4 @@
-﻿namespace ConferenceBooking.Web.APi
+﻿namespace ConferenceBooking.WebAPi
 {
    
         public class WeatherForecast
