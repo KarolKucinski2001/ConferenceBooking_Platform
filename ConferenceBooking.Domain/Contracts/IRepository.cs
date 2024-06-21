@@ -9,7 +9,8 @@ namespace ConferenceBooking.Domain.Contracts
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        TEntity GetById(int id);
+        int Count();
+        TEntity Get(int id);
         IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
         void Insert(TEntity entity);

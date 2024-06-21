@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dto\" />
-    <Folder Include="Validators\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.11" />
@@ -19,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ConferenceBooking.Domain\ConferenceBooking.Domain.csproj" />
+    <ProjectReference Include="..\ConferenceBooking.SharedKernel\ConferenceBooking.SharedKernel.csproj" />
   </ItemGroup>
 
 </Project>

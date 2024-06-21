@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConferenceBooking.Domain.Models
+namespace ConferenceBooking.SharedKernel.Dto
 {
-    public class Room
+    public class UpdateRoomDto
     {
         public int RoomId { get; set; } // Klucz główny
         public string RoomName { get; set; }
@@ -15,12 +15,12 @@ namespace ConferenceBooking.Domain.Models
         public string ImageUrl { get; set; } = "/images/no-image-icon.png";
 
         // Relacja 1:M z Booking
-        public ICollection<Booking> Bookings { get; set; }
+        public ICollection<BookingDto> Bookings { get; set; }
 
         // Relacja 1:M z Equipment
-        public ICollection<Equipment> Equipments { get; set; }
+        public ICollection<EquipmentDto> Equipments { get; set; }
 
         // Relacja 1:M z RoomAvailability
-        public ICollection<RoomAvailability> RoomAvailabilities { get; set; }
+        public ICollection<RoomAvailabilityDto> RoomAvailabilities { get; set; }
     }
 }
