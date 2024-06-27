@@ -1,0 +1,27 @@
+﻿@page "/booking"
+@using ConferenceBooking.SharedKernel.Dto.Booking;
+@inject IBookingService _bookingService
+
+
+
+@if (_booking != null)
+{
+    <div>@_booking.StartTime</div>
+    <div>@_booking.EndTime</div>
+    <div>@_booking.Room.RoomName</div>
+}
+else
+{
+    <div>Loading...</div>
+}
+
+@code {
+    
+    private BookingDto _booking = new();
+    
+
+    protected override async Task OnInitializedAsync()
+    {
+        _booking = await _bookingService.GetByIdWithDetails(1); 
+    }
+}

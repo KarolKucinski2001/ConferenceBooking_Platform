@@ -19,15 +19,12 @@ namespace ConferenceBooking.Infrastructure.Repositories
             _conferenceDbContext = context;
         }
 
-        public int GetMaxId()
+        public List<Booking> GetAll()
         {
-            if (!_conferenceDbContext.Bookings.Any())
-                return 1;
-
-            return _conferenceDbContext.Bookings.Max(x => x.BookingId);
+            return _conferenceDbContext.Bookings.ToList();
         }
 
-        public Booking GetByIdWithDetails(int id)
+        public Booking Get(int id)
         {
             var booking = _conferenceDbContext.Bookings
                 .Include(o => o.Room)
@@ -35,6 +32,11 @@ namespace ConferenceBooking.Infrastructure.Repositories
                 .FirstOrDefault();
 
             return booking;
+        }
+        public bool BookingExists(int id)
+        {
+            var result = _conferenceDbContext.Bookings.Any(x => x.BookingId == id);
+            return result;
         }
     }
 }

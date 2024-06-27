@@ -10,7 +10,8 @@ namespace ConferenceBooking.Domain.Contracts
     // interfejsy repozytoriów specyficznych
     public interface IRoomRepository : IRepository<Room>
     {
-        int GetMaxId();
-        bool IsInUse(string email);
+        public List<Room> GetAll();
+        public Room Get(int id);
+        public bool RoomExists(int id);
     }
 }

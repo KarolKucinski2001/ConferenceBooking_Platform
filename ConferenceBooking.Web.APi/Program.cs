@@ -2,15 +2,18 @@ using ConferenceBooking.WebAPi.Middleware;
 using ConferenceBooking.Application.Mappings;
 using ConferenceBooking.Infrastructure.Repositories;
 using ConferenceBooking.Infrastructure;
-//using ConferenceBooking.SharedKernel.Dto;
 using ConferenceBooking.WebAPi.Middleware;
 using ConferenceBooking.Application.Mappings;
 using FluentValidation.AspNetCore;
 using FluentValidation;
-//using ConferenceBooking.Application.Validators;
 using NLog.Web;
 using NLog;
 using Microsoft.EntityFrameworkCore;
+using ConferenceBooking.Domain.Contracts;
+using ConferenceBooking.Application.Services.Generic;
+using ConferenceBooking.Application.Services.Interfaces;
+using ConferenceBooking.SharedKernel.Dto.Room;
+using ConferenceBooking.Application.Validators.Room;
 
 
 
@@ -46,7 +49,7 @@ try
 
 
     var options = new DbContextOptionsBuilder<ConferenceDbContext>()
-           .UseSqlite("Data Source=conference.db")
+           .UseSqlite("Data Source=../conference.db")
            .Options;
 
     // Tworzenie i inicjalizacja bazy danych
@@ -57,11 +60,36 @@ try
         context.Database.EnsureCreated();
     }
 
-        // rejestracja kontekstu bazy w kontenerze IoC
-        // var sqliteConnectionString = "Data Source=Kiosk.WebAPI.Logger.db";
-    //    var sqliteConnectionString = @"Data Source=C:\Users\karol\OneDrive\Pulpit\ConferenceRoomBookingSystem\ConferenceBooking_Platform";
-    //builder.Services.AddDbContext<ConferenceDbContext>(options =>
-    //    options.UseSqlite(sqliteConnectionString));
+    // rejestracja kontekstu bazy w kontenerze IoC
+    //ar sqliteConnectionString = "Data Source=Kiosk.WebAPI.Logger.db";
+    var sqliteConnectionString = @"Data Source=ConferenceBooking_Platform";
+    builder.Services.AddDbContext<ConferenceDbContext>(options =>
+        options.UseSqlite(sqliteConnectionString));
+
+
+
+    // rejestracja walidatora
+    builder.Services.AddScoped<IValidator<CreateRoomDto>, RegisterCreateRoomDtoValidator>();
+
+    builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+    builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+    builder.Services.AddScoped<DataSeeder>();
+    builder.Services.AddScoped<IRoomService, RoomService>();
+
+    builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+    builder.Services.AddScoped<IBookingService, BookingService>();
+
+
+
+    builder.Services.AddScoped<ExceptionMiddleware>();
+
+
+    // rejestruje w kontenerze zale¿noœci politykê CORS o nazwie SaleKioks,
+    // która zapewnia dostêp do API z dowolnego miejsca oraz przy pomocy dowolnej metody
+    builder.Services.AddCors(o => o.AddPolicy("ConferenceBooking", builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    }));
 
 
     var app = builder.Build();
@@ -73,11 +101,26 @@ try
         app.UseSwaggerUI();
     }
 
+    app.UseMiddleware<ExceptionMiddleware>();
+
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
 
     app.MapControllers();
+
+
+    // wstawia politykê CORS obs³ugi do potoku ¿¹dania
+    app.UseCors("ConferenceBooking");
+
+    // seeding data
+    using (var scope = app.Services.CreateScope())
+    {
+        var dataSeeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();
+        dataSeeder.Seed();
+    }
+
+
 
     app.Run();
 }

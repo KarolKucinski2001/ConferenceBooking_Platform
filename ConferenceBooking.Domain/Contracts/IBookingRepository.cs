@@ -10,7 +10,13 @@ namespace ConferenceBooking.Domain.Contracts
 
     public interface IBookingRepository: IRepository<Booking>
     {
-        int GetMaxId();
-        Booking GetByIdWithDetails(int id);
+        public List<Booking> GetAll();
+        public Booking Get(int id);
+        public bool BookingExists(int id);
+
+
+
+        //int GetMaxId();
+        //Booking GetByIdWithDetails(int id);
     }
 }

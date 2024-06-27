@@ -19,14 +19,19 @@ namespace ConferenceBooking.Infrastructure.Repositories
             _conferenceDbContext = context;
         }
 
-        public int GetMaxId()
+        public List<Room> GetAll()
+        {
+            return _conferenceDbContext.Rooms.ToList();
+        }
+
+        public int Get(int id)
         {
             return _conferenceDbContext.Rooms.Max(x => x.RoomId);
         }
 
-        public bool IsInUse(string name)
+        public bool RoomExists(int id)
         {
-            var result = _conferenceDbContext.Rooms.Any(x => x.RoomName == name);
+            var result = _conferenceDbContext.Rooms.Any(x => x.RoomId == id);
             return result;
         }
 

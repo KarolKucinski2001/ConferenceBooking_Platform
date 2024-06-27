@@ -1,0 +1,29 @@
+﻿@page "/booking/details/{id:int}"
+@using ConferenceBooking.Application.Services.Interfaces;
+@using ConferenceBooking.SharedKernel.Dto.Booking;
+@inject IBookingService _bookingService
+
+<h3>Order @_booking.BookingId</h3>
+<RadzenStack Gap="0" Class="rz-text-truncate">
+    <RadzenText TextStyle="TextStyle.Overline" Class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">StartTime</RadzenText>
+    <RadzenText TextStyle="TextStyle.Body1" Class="rz-text-truncate"><b>@(_booking.StartTime)</b></RadzenText>
+    <RadzenText TextStyle="TextStyle.Overline" Class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">EndTime</RadzenText>
+    <RadzenText TextStyle="TextStyle.Body1" Class="rz-text-truncate"><b>@(_booking.EndTime)</b></RadzenText>
+    <RadzenText TextStyle="TextStyle.Overline" Class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">RoomName</RadzenText>
+    <RadzenText TextStyle="TextStyle.Body1" Class="rz-text-truncate"><b>@(_booking.Room.RoomName)</b></RadzenText>
+    <RadzenText TextStyle="TextStyle.Overline" Class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">Location</RadzenText>
+    <RadzenText TextStyle="TextStyle.Body1" Class="rz-text-truncate"><b>@(_booking.Room.Location)</b></RadzenText>
+</RadzenStack>
+
+
+
+@code {
+    [Parameter]
+    public int Id { get ;set; }
+    private BookingDto _booking = new();
+
+    protected override void OnInitialized()
+    {
+        _booking = _bookingService.GetById(Id); 
+    }
+}

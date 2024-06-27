@@ -20,7 +20,12 @@ namespace ConferenceBooking.Infrastructure.Repositories
             _entities = context.Set<TEntity>();
         }
 
-        public TEntity GetById(int id)
+        public int Count()
+        {
+            return _context.Set<TEntity>().Count();
+        }
+
+        public TEntity Get(int id)
         {
             return _entities.Find(id);
         }

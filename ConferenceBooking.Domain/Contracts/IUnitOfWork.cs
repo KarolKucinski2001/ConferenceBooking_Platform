@@ -11,10 +11,11 @@ namespace ConferenceBooking.Domain.Contracts
     {
         IRoomRepository RoomRepository { get; }
         IBookingRepository BookingRepository { get; }   
-        IRepository<User> Users { get; }
+        IEquipmentRepository EquipmentRepository { get; }   
+        IUserRepository UserRepository{ get; }
       //  IRepository<Room> Rooms { get; }
       //  IRepository<Booking> Bookings { get; }
-        IRepository<Equipment> Equipments { get; }
+      //  IRepository<Equipment> Equipments { get; }
         IRepository<RoomAvailability> RoomAvailabilities { get; }
 
         void Save();

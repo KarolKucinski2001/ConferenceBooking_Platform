@@ -1,0 +1,58 @@
+Opis:
+Aplikacja do zarządzania rezerwacjami sal konferencyjnych w firmie, z możliwością planowania spotkań i zarządzania zasobami.
+Tabele:
+Users - Informacje o użytkownikach.
+Rooms - Dane o salach konferencyjnych.
+Bookings - Rezerwacje sal.
+Equipment - Wyposażenie dostępne w salach.
+RoomAvailability - Dostępność sal.
+Funkcje:
+Rezerwacja sal konferencyjnych.
+Zarządzanie dostępnością wyposażenia.
+Przeglądanie historii rezerwacji.
+
+1. Rezerwacja sal konferencyjnych
+Możliwość przeglądania dostępnych sal konferencyjnych w różnych lokalizacjach.
+Tworzenie nowych rezerwacji sal na określony dzień i godzinę.
+Edycja i usuwanie istniejących rezerwacji.
+Wybór sali na podstawie liczby uczestników, dostępności oraz wyposażenia.
+2. Zarządzanie wyposażeniem
+Przeglądanie dostępnego wyposażenia w poszczególnych salach konferencyjnych (np. rzutniki, ekrany, nagłośnienie).
+
+---------------------------------------------WYMAGANIA:
+
+System powinien zostać zrealizowany z wykorzystaniem zasad czystej architektury z 
+podziałem na następujące warstwy (oddzielne projekty) 
+• Warstwa aplikacji JEST
+• Warstwa infrastruktury JEST
+• Warstwa logiki domenowej JEST
+• Warstwa prezentacji WebAPI JEST
+• Warstwa prezentacji Blazor Server NIE MA
+• Warstwa Prezentacji Blazor Web Assembly NIE MA
+• Projekt typu SharedKernel (do przechowywania elementów wspólnych) JEST
+5. W warstwie WebAPI należy przygotować kontrolery realizujące operacje CRUD dla 
+wszystkich przechowywanych danych oraz innego typu operacje wymagane z punktu 
+widzenia logiki systemu 
+6. W warstwie infrastruktury wykorzystać podejście oparte na repozytoriach oraz 
+jednostkach pracy do implementacji dostępu do danych 
+7. W warstwie logiki biznesowej zdefiniować model danych biznesowych oraz wymagane 
+interfejsy, np. IRepository, itp… 
+8. W projektach serwerowych (WebAPI oraz Blazor Server) należy skorzystać z loggera do 
+zapisu informacji o wykonywanych działaniach. Logger należy skonfigurować w taki 
+sposób, aby tworzył nowe pliki dla każdego dnia. Dodatkowo wszelkie błędy systemu 
+powinny trafiać do innego pliku niż pozostałe informacje 
+9. W każdym z projektów z interfejsem użytkownika (Blazor Server oraz Blazor Web 
+Assembly) należy stworzyć minimum 2 strony, przy czym jedna powinna wyświetlać listę 
+elementów, a druga informacje na temat wygranego elementu 
+10. W każdym z projektów z interfejsem użytkownika należy wykorzystać co najmniej 2 
+komponenty pochodzące z zewnętrznych bibliotek, np. Radzen, MudBlazor, itp… 
+11. W każdym z projektów z interfejsem użytkownika należy wykorzystać obrazy typu .jpg, 
+.png, itp…, 
+12. Wszystkie pola formularzy muszą być walidowane 
+13. Do rozwiązania na poziomie głównym dołączyć plik tekstowy, np. readme.txt, w którym 
+należy podać skład grupy oraz wszelkie informacje potrzebne do prawidłowego 
+skorzystania z systemu (np. nazwy użytkowników, jeśli są dopisani do bazy, itp.) 
+14. Ze względu na potencjalnie duży rozmiar rozwiązania, proszę umieści je spakowane na 
+zewnętrznym serwerze, a na platformę wstawić link
+
+

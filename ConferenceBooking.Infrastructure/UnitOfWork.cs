@@ -15,23 +15,22 @@ namespace ConferenceBooking.Infrastructure
         private readonly ConferenceDbContext _context;
         public IBookingRepository BookingRepository { get; }
         public IRoomRepository RoomRepository { get; }  
-        public IRepository<User> Users { get; private set; }
-       // public IRepository<Room> Rooms { get; private set; }
-      //  public IRepository<Booking> Bookings { get; private set; }
-        public IRepository<Equipment> Equipments { get; private set; }
+        public IUserRepository UserRepository { get; }
+        public IEquipmentRepository EquipmentRepository { get; }    
+
+     
         public IRepository<RoomAvailability> RoomAvailabilities { get; private set; }
 
-        public UnitOfWork(ConferenceDbContext context,IRoomRepository roomRepository, IBookingRepository bookingRepository)
+        public UnitOfWork(ConferenceDbContext context,IRoomRepository roomRepository, IBookingRepository bookingRepository, IUserRepository userRepository, IEquipmentRepository equipmentRepository)
         {
-            _context = context;
+            this._context = context;
 
             this.BookingRepository = bookingRepository;
             this.RoomRepository = roomRepository;
+            this.UserRepository =userRepository;
+            this.EquipmentRepository = equipmentRepository;
 
-            Users = new Repository<User>(_context);
-           // Rooms = new Repository<Room>(_context);
-           // Bookings = new Repository<Booking>(_context);
-            Equipments = new Repository<Equipment>(_context);
+         
             RoomAvailabilities = new Repository<RoomAvailability>(_context);
         }
 
