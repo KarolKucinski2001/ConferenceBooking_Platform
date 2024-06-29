@@ -10,7 +10,7 @@
 
 @foreach (var booking in _bookingList)
 {
-    <BookingComponent Offer="offer" OnBookingDeleted="HandleBookingDeleted" />
+    <BookingComponent Booking="booking" OnBookingDeleted="HandleBookingDeleted" />
 }
 
 @code {
