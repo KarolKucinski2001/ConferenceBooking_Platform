@@ -14,6 +14,12 @@ using ConferenceBooking.Application.Services.Generic;
 using ConferenceBooking.Application.Services.Interfaces;
 using ConferenceBooking.SharedKernel.Dto.Room;
 using ConferenceBooking.Application.Validators.Room;
+using ConferenceBooking.Application.Validators.Equipment;
+using ConferenceBooking.SharedKernel.Dto.Equipment;
+using ConferenceBooking.Application.Validators.User;
+using ConferenceBooking.SharedKernel.Dto.User;
+using ConferenceBooking.SharedKernel.Dto.Booking;
+using ConferenceBooking.Application.Validators.Booking;
 
 
 
@@ -70,14 +76,35 @@ try
 
     // rejestracja walidatora
     builder.Services.AddScoped<IValidator<CreateRoomDto>, RegisterCreateRoomDtoValidator>();
+    builder.Services.AddScoped<IValidator<UpdateRoomDto>, RegisterUpdateRoomDtoValidator>();
+
+    builder.Services.AddScoped<IValidator<CreateEquipmentDto>, RegisterCreateEquipmentDtoValidator>();
+    builder.Services.AddScoped<IValidator<UpdateEquipmentDto>, RegisterUpdateEquipmentDtoValidator>();
+
+    builder.Services.AddScoped<IValidator<CreateUserDto>, RegisterCreateUserDtoValidator>();
+    builder.Services.AddScoped<IValidator<UpdateUserDto>, RegisterUpdateUserDtoValidator>();
+
+    builder.Services.AddScoped<IValidator<CreateBookingDto>, RegisterCreateBookingDtoValidator>();
+    builder.Services.AddScoped<IValidator<UpdateBookingDto>, RegisterUpdateBookingDtoValidator>();
+
+
+    builder.Services.AddScoped<DataSeeder>();
 
     builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-    builder.Services.AddScoped<IRoomRepository, RoomRepository>();
-    builder.Services.AddScoped<DataSeeder>();
-    builder.Services.AddScoped<IRoomService, RoomService>();
 
-    builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+
+
+    builder.Services.AddScoped<IRoomService, RoomService>();
     builder.Services.AddScoped<IBookingService, BookingService>();
+    builder.Services.AddScoped<IEquipmentService, EquipmentService>();
+    builder.Services.AddScoped<IUserService, UserService>();
+
+
+
+    builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+    builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+    builder.Services.AddScoped<IEquipmentRepository, EquipmentRepository>();
+    builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 

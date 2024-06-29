@@ -1,0 +1,40 @@
+﻿@using ConferenceBooking.Application.Services.Interfaces;
+@using ConferenceBooking.SharedKernel.Dto.Room;
+@inject NavigationManager _navigationManager
+@inject IJSRuntime _js
+@inject IRoomService _roomService
+
+<tr class="city">
+    <td>@Room.RoomName</td>
+    <td>@Room.Location</td>
+    <td>
+        <div class="deleteForm">
+            <a @onclick="@(()=>Update(@Room.RoomId))" class="edit">Edit</a>
+            <a @onclick="@(()=>Delete(@Room.RoomId))" class="edit">Delete</a>
+        </div>
+    </td>
+</tr>
+
+@code {
+    [Parameter]
+    public RoomDto Room { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnRoomDeleted { get; set; }
+
+    protected async Task Delete(int id)
+    {
+        var confirm = await _js.InvokeAsync<bool>("confirm", "Are You Sure You Want To Delete this Room?");
+        if (confirm)
+        {
+            _roomService.Delete(id);
+            await OnRoomDeleted.InvokeAsync(id); 
+            StateHasChanged();
+        }
+    }
+
+    protected void Update(int id)
+    {
+        _navigationManager.NavigateTo($"room/edit/{id}");
+    }
+}

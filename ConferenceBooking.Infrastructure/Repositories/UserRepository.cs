@@ -27,7 +27,6 @@ namespace ConferenceBooking.Infrastructure.Repositories
         public User Get(int id)
         {
             var user = _conferenceDbContext.Users
-                .Include(o => o.Name)
                 .Where(o => o.UserId == id)
                 .FirstOrDefault();
 

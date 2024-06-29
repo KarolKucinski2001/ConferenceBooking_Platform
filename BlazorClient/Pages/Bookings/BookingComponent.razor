@@ -1,0 +1,45 @@
+﻿@using ConferenceBooking.SharedKernel.Dto.Booking;
+@inject IBookingService _bookingService
+@inject NavigationManager _navigationManager
+
+<a @onclick="@(()=>ToDetails(@Booking.BookingId))">
+    <div class="booking">
+        <img src=@path>
+
+        <div class="info">
+            <p>@Booking.User.Name</p>
+            <p>@Booking.Room.Capacity</p>
+            <p>@Booking.Room.RoomName</p>
+            <p>
+                @Booking.StartTime.ToString("dd.MM.yyy") - @Booking.EndTime.ToString("dd.MM.yyy")
+            </p>
+        </div>
+    </div>
+</a>
+
+@code {
+    [Parameter]
+    public BookingDto Booking { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnBookingDeleted { get; set; }
+
+    private string path;
+
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+
+        // Initialize photo path here
+        //string[] files = Directory.GetFiles("images/photos"); // runs on client-side, does not have access to images directory
+        int count = 20;
+        var random = new Random();
+        var photoID = random.Next(1, count);
+        path = $"images/photos/test{photoID}.jpg";
+    }
+
+    protected void ToDetails(int id)
+    {
+        _navigationManager.NavigateTo($"Booking/{id}");
+    }
+}

@@ -1,0 +1,53 @@
+﻿@page "/room/create"
+@using Blazored.FluentValidation;
+@using ConferenceBooking.Application.Services.Interfaces;
+@using ConferenceBooking.SharedKernel.Dto.Room;
+@inject IRoomService _roomService
+
+@inject NavigationManager _navigationManager
+
+<PageTitle>Create Room</PageTitle>
+<h1>Create Room</h1>
+<hr />
+
+<div class="createForm" id="createCity">
+    <EditForm Model="@_room" OnValidSubmit="@Create">
+        <FluentValidationValidator @ref="_fluentValidationValidator" DisableAssemblyScanning="@true" />
+        <ValidationSummary />
+        <div class="form-group">
+            <label>Name: </label>
+            <InputText @bind-Value="@_room.RoomName" class="form-control" />
+            <ValidationMessage For="@(() => _room.RoomName)" />
+        </div>
+        
+        <div>
+            <button id="submitCreate" type="submit">Save</button>
+            <button id="submitCreate" type="button" onclick="window.history.back()">Back</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    private CreateRoomDto _room = new CreateRoomDto();
+    private FluentValidationValidator? _fluentValidationValidator;
+    private List<RoomDto> rooms;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _room.RoomName = "Room";
+        
+    }
+
+    private void Create()
+    {
+        _roomService.Create(_room);
+        BackToList();
+    }
+
+    private void BackToList()
+    {
+        _navigationManager.NavigateTo("/room");
+    }
+}

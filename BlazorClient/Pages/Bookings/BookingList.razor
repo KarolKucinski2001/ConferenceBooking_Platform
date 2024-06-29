@@ -1,0 +1,37 @@
+﻿@page "/booking"
+@page "/"
+@page "/home"
+@using ConferenceBooking.SharedKernel.Dto.Booking;
+
+@inject IBookingService _bookingService
+
+<PageTitle>Booking list</PageTitle>
+
+@foreach (var booking in _bookingList)
+{
+    <BookingComponent Booking="booking" OnBookingDeleted="HandleBookingDeleted" />
+}
+
+@code {
+    private List<BookingDto> _bookingList = new List<BookingDto>();
+    private int _max_bookings = 23;
+
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+        _bookingList = await _bookingService.GetAll();
+    }
+
+    private async Task HandleBookingDeleted(int bookingId)
+    {
+        var bookingToRemove = _bookingList.FirstOrDefault(o => o.BookingId == bookingId);
+        if (bookingToRemove != null)
+        {
+            _bookingList.Remove(bookingToRemove);
+            StateHasChanged(); 
+        }
+    }
+
+
+}
+

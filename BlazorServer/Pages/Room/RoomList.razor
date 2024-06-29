@@ -1,0 +1,48 @@
+﻿@page "/room"
+@using ConferenceBooking.Application.Services.Interfaces;
+@using ConferenceBooking.SharedKernel.Dto.Room;
+
+@inject IRoomService _roomService
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Country
+            </th>
+            <th>
+                Options
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var city in _roomList)
+        {
+            <CityComponent City="city" OnCityDeleted="HandleCityDeleted" />
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<RoomDto> _roomList = new List<RoomDto>();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _roomList = _roomService.GetAll();
+    }
+
+    private async Task HandleCityDeleted(int roomId)
+    {
+        // Remove the deleted city from the list
+        var roomToRemove = _roomList.FirstOrDefault(o => o.RoomId == roomId);
+        if (roomToRemove != null)
+        {
+            _roomList.Remove(roomToRemove);
+            StateHasChanged(); // Trigger re-render of this component
+        }
+    }
+}

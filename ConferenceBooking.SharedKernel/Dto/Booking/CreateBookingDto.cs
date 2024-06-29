@@ -15,4 +15,4 @@ namespace ConferenceBooking.SharedKernel.Dto.Booking
         public DateTime EndTime { get; set; }
     }
 }
-}
+

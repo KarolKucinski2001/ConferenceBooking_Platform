@@ -1,27 +1,57 @@
-﻿@page "/booking"
+﻿@page "/booking/{id:int}"
 @using ConferenceBooking.SharedKernel.Dto.Booking;
 @inject IBookingService _bookingService
 
+<div class="details">
+    <img src=@path />
+    <div class="infoDetails">
+        <div class="textInfo">
+            <p>
+                Equipment: &nbsp;&nbsp;
+                @booking.User.Email
+            </p>
+            <p>
+                User name: &nbsp;&nbsp;
+                @booking.User.Name
+            </p>
+            <p>
+                Room Capacity : &nbsp;&nbsp;
+                @booking.Room.Capacity
+            </p>
+            <p>
+                Room Name: &nbsp;&nbsp;  @booking.Room.RoomName
+            </p>
+            <p>
+                From: &nbsp;&nbsp;  @booking.StartTime.ToString("dd.MM.yyy")
+            </p>
+            <p>
+                To: &nbsp;&nbsp;  @booking.EndTime.ToString("dd.MM.yyy")
+            </p>
+        </div>
+        <div class="details-links">
+            <a onclick="window.history.back()">Back</a>
+        </div>
+    </div>
 
-
-@if (_booking != null)
-{
-    <div>@_booking.StartTime</div>
-    <div>@_booking.EndTime</div>
-    <div>@_booking.Room.RoomName</div>
-}
-else
-{
-    <div>Loading...</div>
-}
+</div>
 
 @code {
-    
-    private BookingDto _booking = new();
-    
+    [Parameter]
+    public int Id { get; set; }
+
+    private string path;
+    private BookingDto booking;
 
     protected override async Task OnInitializedAsync()
     {
-        _booking = await _bookingService.GetByIdWithDetails(1); 
+        base.OnInitialized();
+        booking = await _bookingService.GetById(1);
+        //booking = await _bookingService.GetAll();
+
+        int count = 14;
+        var random = new Random();
+        var photoID = random.Next(1, count);
+        path = $"images/photos/test{photoID}.jpg";
     }
+
 }

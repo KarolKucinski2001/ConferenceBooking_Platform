@@ -45,40 +45,42 @@ namespace ConferenceBooking.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<RoomAvailability>()
-                .HasKey(ra => ra.AvailabilityId);
+            base.OnModelCreating(modelBuilder); 
 
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.Bookings)
-                .WithOne(b => b.User)
-                .HasForeignKey(b => b.UserId);
+            //modelBuilder.Entity<RoomAvailability>()
+            //    .HasKey(ra => ra.AvailabilityId);
 
-            modelBuilder.Entity<Room>()
-                .HasMany(r => r.Bookings)
-                .WithOne(b => b.Room)
-                .HasForeignKey(b => b.RoomId);
+            //modelBuilder.Entity<User>()
+            //    .HasMany(u => u.Bookings)
+            //    .WithOne(b => b.User)
+            //    .HasForeignKey(b => b.UserId);
 
-            modelBuilder.Entity<Room>()
-                .HasMany(r => r.Equipments)
-                .WithOne(e => e.Room)
-                .HasForeignKey(e => e.RoomId);
+            //modelBuilder.Entity<Room>()
+            //    .HasMany(r => r.Bookings)
+            //    .WithOne(b => b.Room)
+            //    .HasForeignKey(b => b.RoomId);
 
-            modelBuilder.Entity<Room>()
-                .HasMany(r => r.RoomAvailabilities)
-                .WithOne(ra => ra.Room)
-                .HasForeignKey(ra => ra.RoomId);
+            //modelBuilder.Entity<Room>()
+            //    .HasMany(r => r.Equipments)
+            //    .WithOne(e => e.Room)
+            //    .HasForeignKey(e => e.RoomId);
 
-            // Usuń następujący kod, który powoduje błąd CS0029
-            // modelBuilder.Entity<RoomAvailability>()
-            //     .HasMany(ra => ra.Bookings)
-            //     .WithOne(b => b.Room)
-            //     .HasForeignKey(b => b.RoomId);
+            //modelBuilder.Entity<Room>()
+            //    .HasMany(r => r.RoomAvailabilities)
+            //    .WithOne(ra => ra.Room)
+            //    .HasForeignKey(ra => ra.RoomId);
 
-            // Popraw konfigurację relacji Booking -> Room
-            modelBuilder.Entity<Booking>()
-                .HasOne(b => b.Room)
-                .WithMany(r => r.Bookings)
-                .HasForeignKey(b => b.RoomId);
+            //// Usuń następujący kod, który powoduje błąd CS0029
+            //// modelBuilder.Entity<RoomAvailability>()
+            ////     .HasMany(ra => ra.Bookings)
+            ////     .WithOne(b => b.Room)
+            ////     .HasForeignKey(b => b.RoomId);
+
+            //// Popraw konfigurację relacji Booking -> Room
+            //modelBuilder.Entity<Booking>()
+            //    .HasOne(b => b.Room)
+            //    .WithMany(r => r.Bookings)
+            //    .HasForeignKey(b => b.RoomId);
         }
 
     }

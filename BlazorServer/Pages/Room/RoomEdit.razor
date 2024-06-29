@@ -1,0 +1,64 @@
+﻿@page "/room/edit/{id:int}"
+@using Blazored.FluentValidation;
+@using ConferenceBooking.Application.Services.Interfaces;
+@using ConferenceBooking.SharedKernel.Dto.Room;
+
+@inject IRoomService _roomService
+
+@inject NavigationManager _navigationManager
+
+<PageTitle>Edit City</PageTitle>
+<h1>Edit City</h1>
+<hr />
+
+<div class="createForm" id="createCity">
+    <EditForm Model="@_room" OnValidSubmit="@Update">
+        <FluentValidationValidator @ref="_fluentValidationValidator" DisableAssemblyScanning="@true" />
+        <ValidationSummary />
+        <div class="form-group">
+            <label>Room: </label>
+            <InputText @bind-Value="@_room.RoomName" class="form-control" />
+            <ValidationMessage For="@(() => _room.RoomName)" />
+        </div>
+    
+        <div>
+            <button id="submitCreate" type="submit">Save</button>
+            <button id="submitCreate" type="button" onclick="window.history.back()">Back</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private UpdateRoomDto _room = null;
+    private FluentValidationValidator? _fluentValidationValidator;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        var p = _roomService.GetById(Id);
+        _room = new UpdateRoomDto()
+        {
+            RoomId=p.RoomId,
+            Location= p.Location,
+            RoomName= p.RoomName,
+            Capacity = p.Capacity
+
+        };
+
+    }
+
+    private void Update()
+    {
+        _roomService.Update(_room);
+        BackToList();
+    }
+
+    private void BackToList()
+    {
+        _navigationManager.NavigateTo("/city");
+    }
+}

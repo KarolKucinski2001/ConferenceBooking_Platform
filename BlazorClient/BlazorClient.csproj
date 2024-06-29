@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlazorServer\BlazorServer.csproj" />
     <ProjectReference Include="..\ConferenceBooking.SharedKernel\ConferenceBooking.SharedKernel.csproj" />
   </ItemGroup>
 

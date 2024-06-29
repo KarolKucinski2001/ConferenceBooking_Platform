@@ -53,7 +53,7 @@ namespace ConferenceBooking.Application.Services.Generic
                 throw new NotFoundException("Equipment not found");
             }
 
-            _uow.BookingRepository.Delete(eq);
+            _uow.EquipmentRepository.Delete(eq);
             _uow.Save();
         }
 
