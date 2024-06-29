@@ -27,15 +27,7 @@ namespace ConferenceBooking.Application.Validators.Room
             RuleFor(p => p.Capacity)
                 .GreaterThan(0);
 
-            RuleFor(s => s.RoomId)
-                .Custom((value, context) =>
-                {
-                    bool inUse = unitOfWork.RoomRepository.RoomExists(value);
-                    if (inUse)
-                    {
-                        context.AddFailure("Room", $"Room of id {value} doesnt exist");
-                    }
-                });
+       
         }
     }
 }

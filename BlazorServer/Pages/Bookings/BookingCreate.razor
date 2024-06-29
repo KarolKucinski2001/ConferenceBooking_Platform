@@ -1,0 +1,85 @@
+﻿@page "/booking/create"
+@inject IBookingService _bookingService
+@inject IUserService _userService
+@inject IRoomService _roomService
+
+@inject NavigationManager _navigationManager
+
+<PageTitle>Create booking</PageTitle>
+<h1>Create Booking</h1>
+<hr />  
+
+<div class="createForm">
+    <EditForm Model="@_booking" OnValidSubmit="@Create">
+        <FluentValidationValidator @ref="_fluentValidationValidator" DisableAssemblyScanning="@true" />
+        <ValidationSummary />
+        <div class="form-group">
+            <label>Room: </label>
+            <InputSelect @bind-Value="@_booking.RoomId" class="form-control">
+                @foreach (var room in rooms)
+                {
+                    <option value="@room.RoomId">@room.RoomName</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => _booking.RoomId)" />
+        </div>
+
+        <div class="form-group">
+            <label>User: </label>
+            <InputSelect @bind-Value="@_booking.UserId" class="form-control">
+                @foreach (var user in users)
+                {
+                    <option value="@user.UserId">@user.Name</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => _booking.UserId)" />
+        </div>
+     
+        <div class="form-group">
+            <label>Date From: </label>
+            <InputDate @bind-Value="@_booking.StartTime" class="form-control" />
+            <ValidationMessage For="@(() => _booking.EndTime)" />
+        </div>
+        <div class="form-group">
+            <label>Date To: </label>
+            <InputDate @bind-Value="@_booking.StartTime" class="form-control" />
+            <ValidationMessage For="@(() => _booking.EndTime)" />
+        </div>
+
+        <div>
+            <button id="submitCreate" type="submit">Create</button>
+            <button id="submitCreate" type="button" @onclick="BackToList">Back</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    private CreateBookingDto _booking = new CreateBookingDto();
+    private FluentValidationValidator? _fluentValidationValidator;
+    private List<UserDto> users;
+    private List<RoomDto> rooms;
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        // _offer.DateFrom = DateTime.Now.Date.AddDays(7);
+        // _offer.DateTo = DateTime.Now.Date.AddDays(14);
+        // _offer.Price = 5000;
+
+        rooms = _roomService.GetAll();
+        users = _userService.GetAll();
+    }
+
+    private void Create()
+    {
+        _bookingService.Create(_booking);
+        BackToList();
+    }
+
+    private void BackToList()
+    {
+        _navigationManager.NavigateTo("/booking");
+    }
+}

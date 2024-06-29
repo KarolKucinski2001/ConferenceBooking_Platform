@@ -1,7 +1,4 @@
 ﻿@page "/room"
-@using ConferenceBooking.Application.Services.Interfaces;
-@using ConferenceBooking.SharedKernel.Dto.Room;
-
 @inject IRoomService _roomService
 
 <table class="table">
@@ -19,9 +16,9 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var city in _roomList)
+        @foreach (var room in _roomList)
         {
-            <CityComponent City="city" OnCityDeleted="HandleCityDeleted" />
+            <RoomComponent Room="room" OnRoomDeleted="HandleRoomDeleted" />
         }
     </tbody>
 </table>
@@ -35,7 +32,7 @@
         _roomList = _roomService.GetAll();
     }
 
-    private async Task HandleCityDeleted(int roomId)
+    private async Task HandleRoomDeleted(int roomId)
     {
         // Remove the deleted city from the list
         var roomToRemove = _roomList.FirstOrDefault(o => o.RoomId == roomId);

@@ -1,0 +1,39 @@
+﻿@inject NavigationManager _navigationManager
+@inject IJSRuntime _js
+@inject IEquipmentService _equipmentService
+
+<tr class="equipment">
+    <td>@Equipment.EquipmentName</td>
+    <td>@Equipment.Quantity</td>
+    <td>@Equipment.RoomId</td>
+    <td>
+        <div class="deleteForm">
+            <a @onclick="@(()=>Update(@Equipment.EquipmentId))" class="edit">Edit</a>
+            <a @onclick="@(()=>Delete(@Equipment.EquipmentId))" class="edit">Delete</a>
+        </div>
+    </td>
+</tr>
+
+@code {
+    [Parameter]
+    public EquipmentDto Equipment { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnEquipmentDeleted { get; set; }
+
+    protected async Task Delete(int id)
+    {
+        var confirm = await _js.InvokeAsync<bool>("confirm", "Are You Sure You Want To Delete this Equipment?");
+        if (confirm)
+        {
+            _equipmentService.Delete(id);
+            await OnEquipmentDeleted.InvokeAsync(id); // Notify parent component
+            StateHasChanged();
+        }
+    }
+
+    protected void Update(int id)
+    {
+        _navigationManager.NavigateTo($"equipment/edit/{id}");
+    }
+}

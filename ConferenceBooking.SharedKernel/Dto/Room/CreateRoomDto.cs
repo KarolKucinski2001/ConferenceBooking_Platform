@@ -8,7 +8,7 @@ namespace ConferenceBooking.SharedKernel.Dto.Room
 {
     public class CreateRoomDto
     {
-        public int RoomId { get; set; } 
+       //public int RoomId { get; set; } 
         public string RoomName { get; set; }
         public string Location { get; set; }
         public int Capacity { get; set; }

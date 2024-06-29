@@ -23,12 +23,12 @@ namespace ConferenceBooking.Domain.Models
         //public string ImageUrl { get; set; } = "/images/no-image-icon.png";
 
         // Relacja 1:M z Booking
-        public ICollection<Booking> Bookings { get; set; }
+        //public ICollection<Booking> Bookings { get; set; }
 
-        // Relacja 1:M z Equipment
-        public ICollection<Equipment> Equipments { get; set; }
+        //// Relacja 1:M z Equipment
+        //public ICollection<Equipment> Equipments { get; set; }
 
-        // Relacja 1:M z RoomAvailability
-        public ICollection<RoomAvailability> RoomAvailabilities { get; set; }
+        //// Relacja 1:M z RoomAvailability
+        //public ICollection<RoomAvailability> RoomAvailabilities { get; set; }
     }
 }

@@ -31,7 +31,7 @@ namespace ConferenceBooking.Application.Services.Generic
             }
 
          
-            var room = _mapper.Map<Room>(dto);
+           var room = _mapper.Map<Room>(dto);
            
 
             //// set default image url if user did not souuport its own

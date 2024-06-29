@@ -1,0 +1,46 @@
+﻿@page "/equipment"
+
+@inject IEquipmentService _equipmentService
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Equipment Name
+            </th>
+            <th>
+                Room
+            </th>
+            <th>
+                Quantity
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var equipment in _equipmentList)
+        {
+            <EquipmentComponent Equipment="equipment" OnEquipmentDeleted="HandleEquipmentDeleted" />
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<EquipmentDto> _equipmentList = new List<EquipmentDto>();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _equipmentList = _equipmentService.GetAll();
+    }
+
+    private async Task HandleEquipmentDeleted(int equipmentId)
+    {
+     
+        var equipmentToRemove = _equipmentList.FirstOrDefault(o => o.EquipmentId == equipmentId);
+        if (equipmentToRemove != null)
+        {
+            _equipmentList.Remove(equipmentToRemove);
+            StateHasChanged(); 
+        }
+    }
+}

@@ -1,29 +1,67 @@
-﻿@page "/booking/details/{id:int}"
-@using ConferenceBooking.Application.Services.Interfaces;
-@using ConferenceBooking.SharedKernel.Dto.Booking;
+﻿@page "/booking/{id:int}"
 @inject IBookingService _bookingService
+@inject IRoomService _roomService
+@inject IEquipmentService _equipmentService
 
-<h3>Order @_booking.BookingId</h3>
-<RadzenStack Gap="0" Class="rz-text-truncate">
-    <RadzenText TextStyle="TextStyle.Overline" Class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">StartTime</RadzenText>
-    <RadzenText TextStyle="TextStyle.Body1" Class="rz-text-truncate"><b>@(_booking.StartTime)</b></RadzenText>
-    <RadzenText TextStyle="TextStyle.Overline" Class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">EndTime</RadzenText>
-    <RadzenText TextStyle="TextStyle.Body1" Class="rz-text-truncate"><b>@(_booking.EndTime)</b></RadzenText>
-    <RadzenText TextStyle="TextStyle.Overline" Class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">RoomName</RadzenText>
-    <RadzenText TextStyle="TextStyle.Body1" Class="rz-text-truncate"><b>@(_booking.Room.RoomName)</b></RadzenText>
-    <RadzenText TextStyle="TextStyle.Overline" Class="rz-mt-2 rz-my-0" Style="color: var(--rz-text-tertiary-color);">Location</RadzenText>
-    <RadzenText TextStyle="TextStyle.Body1" Class="rz-text-truncate"><b>@(_booking.Room.Location)</b></RadzenText>
-</RadzenStack>
+@inject NavigationManager _navigationManager
+
+<div class="details">
+    <img src=@path />
+    <div class="infoDetails">
+        <div class="textInfo">
+            <p>
+                User Name: &nbsp;&nbsp;
+                @booking.User.Name
+            </p>
+            <p>
+                Room: &nbsp;&nbsp;
+                @booking.Room.RoomName
+            </p>
+           
+            <p>
+                From: &nbsp;&nbsp;  @booking.StartTime.ToString("dd.MM.yyy")
+            </p>
+            <p>
+                To: &nbsp;&nbsp;  @booking.EndTime.ToString("dd.MM.yyy")
+            </p>
+        </div>
+        <div class="details-links">
+            <a @onclick="@(()=>ToRoom(@booking.Room.RoomId))">Room</a>
+            <a @onclick="@(()=>Update(@booking.BookingId))">Edit</a>
+            <a onclick="window.history.back()">Back</a>
+        </div>
+    </div>
 
 
+</div>
 
 @code {
     [Parameter]
-    public int Id { get ;set; }
-    private BookingDto _booking = new();
+    public int Id { get; set; }
+
+    private string path;
+    private BookingDto booking;
 
     protected override void OnInitialized()
     {
-        _booking = _bookingService.GetById(Id); 
+        base.OnInitialized();
+        booking = _bookingService.GetById(Id);
+
+        // Initialize photo path here
+        string[] files = Directory.GetFiles("wwwroot/images/photos");
+        int count = files.Count();
+        var random = new Random();
+        var photoID = random.Next(1, count);
+        path = files[photoID][7..];
+    }
+
+    protected void Update(int id)
+    {
+        _navigationManager.NavigateTo($"booking/edit/{id}");
+    }
+
+    protected void ToRoom(int id)
+    {
+        _navigationManager.NavigateTo($"room/{id}");
     }
 }

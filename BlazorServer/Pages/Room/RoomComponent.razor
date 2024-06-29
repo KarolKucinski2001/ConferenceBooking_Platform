@@ -1,12 +1,12 @@
-﻿@using ConferenceBooking.Application.Services.Interfaces;
-@using ConferenceBooking.SharedKernel.Dto.Room;
-@inject NavigationManager _navigationManager
+﻿@inject NavigationManager _navigationManager
 @inject IJSRuntime _js
 @inject IRoomService _roomService
 
-<tr class="city">
+<tr class="room">
     <td>@Room.RoomName</td>
     <td>@Room.Location</td>
+    <td>@Room.Capacity</td>
+
     <td>
         <div class="deleteForm">
             <a @onclick="@(()=>Update(@Room.RoomId))" class="edit">Edit</a>

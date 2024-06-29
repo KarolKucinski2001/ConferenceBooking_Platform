@@ -10,7 +10,7 @@
 <h1>Create Room</h1>
 <hr />
 
-<div class="createForm" id="createCity">
+<div class="createForm" id="createRoom">
     <EditForm Model="@_room" OnValidSubmit="@Create">
         <FluentValidationValidator @ref="_fluentValidationValidator" DisableAssemblyScanning="@true" />
         <ValidationSummary />
@@ -18,6 +18,17 @@
             <label>Name: </label>
             <InputText @bind-Value="@_room.RoomName" class="form-control" />
             <ValidationMessage For="@(() => _room.RoomName)" />
+        </div>
+
+        <div class="form-group">
+            <label>Room Location: </label>
+            <InputText @bind-Value="@_room.Location" class="form-control" />
+            <ValidationMessage For="@(() => _room.Location)" />
+        </div>
+        <div class="form-group">
+            <label>Capacity: </label>
+            <InputNumber @bind-Value="@_room.Capacity" class="form-control" />
+            <ValidationMessage For="@(() => _room.Capacity)" />
         </div>
         
         <div>

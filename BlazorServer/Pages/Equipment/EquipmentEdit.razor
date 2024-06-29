@@ -1,0 +1,74 @@
+﻿@page "/equipment/edit/{id:int}"
+@inject IEquipmentService _equipmentService
+@inject IRoomService _roomService
+
+@inject NavigationManager _navigationManager
+
+<PageTitle>Edit Equipment</PageTitle>
+<h1>Edit Equipment</h1>
+<hr />
+
+<div class="createForm" id="createRoom">
+    <EditForm Model="@_equipment" OnValidSubmit="@Update">
+        <FluentValidationValidator @ref="_fluentValidationValidator" DisableAssemblyScanning="@true" />
+        <ValidationSummary />
+        <div class="form-group">
+            <label>Name: </label>
+            <InputText @bind-Value="@_equipment.EquipmentName" class="form-control" />
+            <ValidationMessage For="@(() => _equipment.EquipmentName)" />
+        </div>
+        <div class="form-group">
+            <label>Quantity: </label>
+            <InputNumber @bind-Value="@_equipment.Quantity" class="form-control" />
+            <ValidationMessage For="@(() => _equipment.Quantity)" />
+        </div>
+        <div class="form-group">
+            <label>Room: </label>
+            <InputSelect @bind-Value="@_equipment.RoomId" class="form-control">
+                @foreach (var rm in rooms)
+                {
+                    <option value="@rm.RoomId">@rm.RoomName</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => _equipment.RoomId)" />
+        </div>
+        <div>
+            <button id="submitCreate" type="submit">Save</button>
+            <button id="submitCreate" type="button" onclick="window.history.back()">Back</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    public int Id { get; set; }
+    private UpdateEquipmentDto _equipment = null;
+    private FluentValidationValidator? _fluentValidationValidator;
+
+    //private List<EquipmentDto> equipments;
+    private List<RoomDto> rooms;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        var a = _equipmentService.GetById(Id);
+        _equipment = new UpdateEquipmentDto()
+            {
+                EquipmentId = a.EquipmentId,
+                RoomId = a.RoomId,
+                EquipmentName = a.EquipmentName,
+                Quantity = a.Quantity
+
+            };
+    }
+
+    private void Update()
+    {
+        _equipmentService.Update(_equipment);
+        BackToList();
+    }
+
+    private void BackToList()
+    {
+        _navigationManager.NavigateTo("/equipment");
+    }
+}

@@ -1,0 +1,35 @@
+﻿@page "/booking"
+
+@inject IBookingService _bookingService
+
+<PageTitle>Booking list</PageTitle>
+
+<div id="landing-page">
+    <img src="images/photos/test1.jpg" alt="Hello">
+</div>
+
+@foreach (var booking in _bookingList)
+{
+    <BookingComponent Offer="offer" OnBookingDeleted="HandleBookingDeleted" />
+}
+
+@code {
+    private List<BookingDto> _bookingList = new List<BookingDto>();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _bookingList = _bookingService.GetAll().ToList();
+    }
+
+    private async Task HandleBookingDeleted(int bookingId)
+    {
+        // Remove the deleted offer from the list
+        var bookingToRemove = _bookingList.FirstOrDefault(o => o.BookingId == bookingId);
+        if (bookingToRemove != null)
+        {
+            _bookingList.Remove(bookingToRemove);
+            StateHasChanged(); // Trigger re-render of this component
+        }
+    }
+}

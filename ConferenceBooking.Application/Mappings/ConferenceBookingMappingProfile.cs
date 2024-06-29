@@ -18,11 +18,25 @@ namespace ConferenceBooking.Application.Mappings
         public ConferenceBookingMappingProfile()
         {
             CreateMap<BookingDto, Booking>().ReverseMap();
-            CreateMap<RoomDto, Room>().ReverseMap();
+            
             CreateMap<RoomAvailabilityDto, RoomAvailability>().ReverseMap();
             CreateMap<UserDto, User>().ReverseMap();
             CreateMap<EquipmentDto, Equipment>().ReverseMap();
 
+
+            CreateMap<RoomDto, Room>()
+                       .ForMember(dest => dest.RoomId, opt => opt.Ignore());
+            CreateMap<CreateRoomDto, Room>();
+            CreateMap<Room, RoomDto>();
+
+
+            CreateMap<Equipment, EquipmentDto>();
+            CreateMap<CreateEquipmentDto, Equipment>();
+
+            CreateMap<UpdateEquipmentDto, Equipment>();
+
+            CreateMap<CreateBookingDto, Booking>();
+            CreateMap<Booking, BookingDto>();
         }
     }
 }

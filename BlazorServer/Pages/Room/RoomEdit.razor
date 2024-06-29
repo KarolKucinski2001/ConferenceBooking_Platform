@@ -7,20 +7,31 @@
 
 @inject NavigationManager _navigationManager
 
-<PageTitle>Edit City</PageTitle>
-<h1>Edit City</h1>
+<PageTitle>Edit Room</PageTitle>
+<h1>Edit Room</h1>
 <hr />
 
-<div class="createForm" id="createCity">
+<div class="createForm" id="createRoom">
     <EditForm Model="@_room" OnValidSubmit="@Update">
         <FluentValidationValidator @ref="_fluentValidationValidator" DisableAssemblyScanning="@true" />
         <ValidationSummary />
         <div class="form-group">
-            <label>Room: </label>
+            <label>Name: </label>
             <InputText @bind-Value="@_room.RoomName" class="form-control" />
             <ValidationMessage For="@(() => _room.RoomName)" />
         </div>
-    
+
+        <div class="form-group">
+            <label>Room Location: </label>
+            <InputText @bind-Value="@_room.Location" class="form-control" />
+            <ValidationMessage For="@(() => _room.Location)" />
+        </div>
+        <div class="form-group">
+            <label>Capacity: </label>
+            <InputNumber @bind-Value="@_room.Capacity" class="form-control" />
+            <ValidationMessage For="@(() => _room.Capacity)" />
+        </div>
+
         <div>
             <button id="submitCreate" type="submit">Save</button>
             <button id="submitCreate" type="button" onclick="window.history.back()">Back</button>
@@ -59,6 +70,6 @@
 
     private void BackToList()
     {
-        _navigationManager.NavigateTo("/city");
+        _navigationManager.NavigateTo("/room");
     }
 }

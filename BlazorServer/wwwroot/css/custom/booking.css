@@ -27,7 +27,7 @@
         height: 100vh;
     }
 
-.offer img {
+.booking img {
     width: 50%;
     height: 100%;
     float: left;
@@ -37,11 +37,11 @@
     transition: transform .5s, visibility .25s ease-in;
 }
 
-    .offer img:hover {
+    .booking img:hover {
         transform: scale(0.99);
     }
 
-.offer {
+.booking {
     margin-top: 4%;
     padding: 2%;
     width: 70%;
@@ -51,7 +51,7 @@
     transition: transform .5s, visibility .25s ease-in;
 }
 
-    .offer:hover {
+    .booking:hover {
         transform: scale(1.02);
         cursor: pointer;
     }
@@ -159,7 +159,7 @@
     }
 
 
-#filter-hotels {
+#filter-Room {
     margin-top: 7%;
 }
 
