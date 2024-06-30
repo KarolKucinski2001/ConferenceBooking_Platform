@@ -1,6 +1,9 @@
 ﻿@page "/room"
 @inject IRoomService _roomService
 
+
+<div style="margin-top: 220px;">
+
 <table class="table">
     <thead>
         <tr>
@@ -22,6 +25,7 @@
         }
     </tbody>
 </table>
+</div>
 
 @code {
     private List<RoomDto> _roomList = new List<RoomDto>();
